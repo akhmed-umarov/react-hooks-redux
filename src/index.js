@@ -8,7 +8,9 @@ import App from './components/App/App.js';
 ///Компонент не может изменять пропсы которые в него передают , для того чтобы что то менять надо рендорить компонент заново
 ///in jsx you can't used object in elements if your want show this object in dom
 
+
 //start third day
+//keys необходимы для согласования дом дерева , чтобы не менять полностью все дом дерево замена будет происходить только на элементах с нужными ключами
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
