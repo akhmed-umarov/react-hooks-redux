@@ -7,9 +7,9 @@ import ProductAddForm from "../product-add-form/product-add-form";
 
 
 const data = [
-   {name: "Akhmed" , salary: 1000 , increase: true},
-   {name: "Ilyas" , salary: 2000 , increase: false},
-   {name: "Amina" , salary: 3000 , increase: false}
+   {name: "Akhmed" , salary: 1000 , increase: true , id: 1},
+   {name: "Ilyas" , salary: 2000 , increase: false, id: 2},
+   {name: "Amina" , salary: 3000 , increase: false, id: 3}
 ]
 
 
