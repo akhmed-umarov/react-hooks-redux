@@ -2,12 +2,13 @@ import ProductListItem from "../product-list-item/product-list-item"
 import "./product-list.css";
 
 
-const ProductList = ({arrayData})=>{ 
+const ProductList = ({arrayData , onDelete})=>{ 
 
 
 
 
    const elements = arrayData.map(el=>{ 
+
 
 
       ///отсюда мы вытащили из объекта отдельно его id а все остальные свойства закинули в другую переменную с помощью рест и спрет
@@ -20,7 +21,10 @@ const ProductList = ({arrayData})=>{
       // для работы со списком отрибутов необходимо работать с keys  для большого ускорения работы вашего приложения
 
       return (
-          <ProductListItem key = {id} {...elProps}/>
+          <ProductListItem 
+          onDelete = {()=>(onDelete(id))}
+          key = {id} 
+          {...elProps}/>
       )
    })
 

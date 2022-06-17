@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './product-list-item.css';
 
 class ProductListItem extends Component { 
-   constructor (props){ 
+   constructor (props ){ 
       super(props); 
       // лучше тут не добавлять все в state так как тогда все время  сюда буду гонять лишние данные 
       this.state = {
@@ -34,7 +34,7 @@ class ProductListItem extends Component {
  
    render() { 
 
-   const {name , salary } = this.props;
+   const {name , salary , onDelete} = this.props;
    const {increase , likeStar} = this.state;
 
    
@@ -68,6 +68,7 @@ class ProductListItem extends Component {
                  </button>
    
                   <button type="button"
+                        onClick={onDelete}
                           className="btn-trash btn-sm ">
                       <i className="fas fa-trash"></i>
                  </button>

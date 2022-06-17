@@ -27,7 +27,8 @@ constructor (props) {
     super(props); 
     this.state = { 
         name: "",
-        salary: ""
+        salary: "",
+        id: 4
     }
 }
 
@@ -43,8 +44,34 @@ this.setState({
 
 render() { 
 
-  
-let {name, salary} = this.state
+// let {onPost} = this.props
+let {name, salary , id} = this.state
+let { postItem } = this.props
+// let {postItem} = this.props
+
+
+let FinalPostItem = ()=>{ 
+
+this.state.id = this.state.id + 1;
+
+return postItem({
+    name: name, 
+    salary: salary,
+    id: id 
+})
+
+}
+
+
+
+
+// let newOnPost = (e)=>{ 
+// let NewPost = { 
+//     name: e.target.name,
+//     salary: e.target.salary
+// }
+// onPost(NewPost)
+// }
 
 
    return (
@@ -65,8 +92,11 @@ let {name, salary} = this.state
               className="form-control new-post-label"
               placeholder="З/П в $?" />
 
-          <button type="submit"
-                  className="btn btn-outline-danger">Добавить</button>
+          <button 
+          type="button"
+        //   onClick={()=>{postItem()}}
+        onClick={FinalPostItem}
+          className="btn btn-outline-danger">Добавить</button>
       </form>
   </div>
    )
