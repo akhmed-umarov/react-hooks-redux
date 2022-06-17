@@ -17,73 +17,114 @@ constructor(props){
    super(props)
    this.state = { 
       data: [
-         {name: "Akhmed" , salary: 1000 , increase: true , id: 1},
-         {name: "Ilyas" , salary: 2000 , increase: false, id: 2},
-         {name: "Amina" , salary: 3000 , increase: false, id: 3}
+         {name: "Akhmed" , salary: 1000 , increase: true , likeStar: false, id: 1},
+         {name: "Ilyas" , salary: 2000 , increase: false, likeStar: false,id: 2},
+         {name: "Amina" , salary: 3000 , increase: false, likeStar: false, id: 3}
       ]
    };
+   this.maxId = 4;
+
+   // this.dataLength = this.state.data.length;
   
 
 }
 
 
 
+OnIncrease = (id) =>{ 
+   this.setState(({data})=>{ 
+      let newData = data.map(el=>{ 
+         if (el.id === id){ 
+            return {...el , increase: !el.increase}
+         }
+         return el
+      })
+   return { 
+      data:  newData
+   }
+   })
+}
+
+OnLikeStar = (id)=>{ 
+   this.setState(({data})=>{ 
+      let newData = data.map(el=>{ 
+         if (el.id === id){ 
+            return { ...el , likeStar: !el.likeStar}
+         }
+         return el
+      })
+      return { 
+         data: newData
+      }
+   })
+}
+
+
+
 deleteItem = (id)=>{ 
    this.setState(({data})=>{
-
       return { 
-         data:  data.filter(el=> el.id!=id)
+         data:  data.filter(el=> el.id!==id)
       }
    })
 }
 
-PostItem = (post)=>{ 
+addItem =(name , salary)=>{ 
 
-   console.log(post);
-   this.setState(({data})=>{
-   let newPost = post;
-   let newData = [...data , newPost]
-      return { 
-         data:  newData
-      }
-   })
+   let newPerson = { 
+      name: name, 
+      salary: salary,
+      increase: false,
+      likeStar: false,
+      id: this.maxId++
+   }
+
+   this.setState(({data})=>({ 
+      data: [...data , newPerson]
+   }))
+
 }
 
-// postItem = (event)=>{ 
-//    let newItem = {
-//       // name: event.target.state.name,
-//       // salary: event.target.state.salary 
-//       name: state.name,
-//       salary: state.salary,
-//       id: this.state.id
-//    }
-//    // event.preventDefault();
-//    // console.log(event.target.value);
-//    this.setState(({data , id})=>{
-//       let newData = [...data , newItem];
-//       return { 
-//          id: id+1,
-//          data: newData
-//       }
+// infoItem =()=>{ 
+//    let btn = document.querySelectorAll('button');
+//    btn.forEach(el=>{ 
+//       el.addEventListener('click' , ()=>{ 
+//          console.log(`object`);
+//       })
 //    })
+//    return this.state.data.length
 // }
 
 render() {
+
+
+
+const infoItem = this.state.data.length;
+
+const increased = this.state.data.filter(el=>{ 
+  return  (el.increase === true)
+}).length
+
+
    return ( 
       <div className="app">
-         <AppInfo/>
-
+         {/* <AppInfo infoItem = {this.infoItem}/> */}
+         <AppInfo 
+         infoItem = {infoItem}
+         increased = {increased} />
          <div className="search-panel">
             <SearchPanel/>
             <AppFilter/>
          </div> 
 
       <ProductList
+      OnLikeStar = {this.OnLikeStar}
+      OnIncrease = {this.OnIncrease}
       onDelete = {this.deleteItem}
       arrayData = {this.state.data}/>
 
       <ProductAddForm
-      postItem = {this.PostItem} 
+      onAdd={this.addItem}
       />
       </div>
    );
