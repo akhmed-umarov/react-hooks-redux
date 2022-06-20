@@ -20,7 +20,13 @@ constructor(props){
          {name: "Akhmed" , salary: 1000 , increase: true , likeStar: false, id: 1},
          {name: "Ilyas" , salary: 2000 , increase: false, likeStar: false,id: 2},
          {name: "Amina" , salary: 3000 , increase: false, likeStar: false, id: 3}
-      ]
+      ], 
+      term : '', 
+
+
+      filter: 'all'
+
+
    };
    this.maxId = 4;
 
@@ -107,9 +113,60 @@ if (name.length > 4 && salary.length > 1) {
 //    return this.state.data.length
 // }
 
+
+
+
+searchEmp = (items , term)=>{ 
+   if (term.length === 0 ){ 
+      return items
+   }
+
+   return items.filter(item =>{
+      return item.name.indexOf(term) > -1
+   })
+}
+
+
+onUpdateSearch = (term)=>{ 
+   this.setState({term : term})
+}
+
+onUpdateFilter = (filter)=>{ 
+   this.setState({filter: filter})
+}
+
+
+
+
+filterData = (data, filter)=>{ 
+let filterArray = data
+switch (filter){
+   case 'increase':
+      filterArray = filterArray.filter(el=> {
+         return el.increase===true
+      })
+      break
+   case 'zp': 
+      filterArray = filterArray.filter(el=> {
+         return el.salary >=1000
+      })
+      break
+   default: 
+   return filterArray
+}
+
+return filterArray
+}
+
+
+
+
+
+
 render() {
 
 
+const { data, term , filter} = this.state
 
 const infoItem = this.state.data.length;
 
@@ -117,7 +174,11 @@ const increased = this.state.data.filter(el=>{
   return  (el.increase === true)
 }).length
 
+const visableData = this.searchEmp(data, term);
 
+const filterVisableData = this.filterData(visableData , filter)
+
+ 
    return ( 
       <div className="app">
          {/* <AppInfo infoItem = {this.infoItem}/> */}
@@ -125,8 +186,14 @@ const increased = this.state.data.filter(el=>{
          infoItem = {infoItem}
          increased = {increased} />
          <div className="search-panel">
-            <SearchPanel/>
-            <AppFilter/>
+            <SearchPanel
+            onUpdateSearch = {this.onUpdateSearch}
+            term = {term}
+            />
+            <AppFilter
+            onUpdateFilter = {this.onUpdateFilter}
+            filter = {filter}
+            />
          </div> 
 
       <ProductList
@@ -134,7 +201,16 @@ const increased = this.state.data.filter(el=>{
       OnLikeStar = {this.OnLikeStar}
       OnIncrease = {this.OnIncrease}
       onDelete = {this.deleteItem}
-      arrayData = {this.state.data}/>
+      // arrayData = {visableData}
+
+
+      arrayData = {filterVisableData}
+
+      
+      // OnFilter = {OnFilter}
+
+      />
+      {/* arrayData = {data}/> */}
 
       <ProductAddForm
       onAdd={this.addItem}
