@@ -7,7 +7,7 @@ const ProductListItem = (props)=> {
 
 
 
-   const {name , salary , onDelete , increase , likeStar , OnIncrease , OnLikeStar} = props;
+   const {name , salary , onDelete , increase , likeStar , OnIncrease , OnLikeStar , OnChange} = props;
 
 
    
@@ -27,15 +27,18 @@ const ProductListItem = (props)=> {
             <span
             onClick={OnLikeStar}
              className="list-group-item-label">{name}</span>
-            <input type="text" className="list-group-item-input" defaultValue={salary + "$"}/>
+            <input type="text" className="list-group-item-input" defaultValue={salary + "$"} data-toggle="likeStar"/>
             <div className='d-flex justify-content-center align-items-center'>
                  <button type="button"
-                        onClick={OnIncrease}
+                        data-toggle='increase'
+                        onClick={OnChange}
+                        // onClick={OnIncrease}
                        className="btn-cookie btn-sm ">
                        <i className="fas fa-cookie"></i>
                  </button>
    
                   <button type="button"
+
                         onClick={onDelete}
                           className="btn-trash btn-sm ">
                       <i className="fas fa-trash"></i>

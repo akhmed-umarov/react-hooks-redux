@@ -59,7 +59,19 @@ OnLikeStar = (id)=>{
    })
 }
 
-
+OnChange = (id , prop) =>{ 
+   this.setState(({data})=>{ 
+      let newData = data.map(el=>{ 
+         if (el.id === id){ 
+            return {...el , [prop]: !el[prop]}
+         }
+         return el
+      })
+   return { 
+      data:  newData
+   }
+   })
+}
 
 deleteItem = (id)=>{ 
    this.setState(({data})=>{
@@ -78,11 +90,11 @@ addItem =(name , salary)=>{
       likeStar: false,
       id: this.maxId++
    }
-
+if (name.length > 4 && salary.length > 1) { 
    this.setState(({data})=>({ 
       data: [...data , newPerson]
    }))
-
+}
 }
 
 // infoItem =()=>{ 
@@ -118,6 +130,7 @@ const increased = this.state.data.filter(el=>{
          </div> 
 
       <ProductList
+      OnChange = {this.OnChange}
       OnLikeStar = {this.OnLikeStar}
       OnIncrease = {this.OnIncrease}
       onDelete = {this.deleteItem}

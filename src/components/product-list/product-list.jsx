@@ -2,7 +2,7 @@ import ProductListItem from "../product-list-item/product-list-item"
 import "./product-list.css";
 
 
-const ProductList = ({arrayData , onDelete , OnIncrease , OnLikeStar})=>{ 
+const ProductList = ({arrayData , onDelete , OnIncrease , OnLikeStar , OnChange})=>{ 
 
    
 
@@ -14,6 +14,10 @@ const ProductList = ({arrayData , onDelete , OnIncrease , OnLikeStar})=>{
 
       return (
           <ProductListItem 
+
+          OnChange = {(el)=>(OnChange(id , el.currentTarget.getAttribute('data-toggle')))}
+
+
           onDelete = {()=>(onDelete(id))}
           OnLikeStar = {()=>(OnLikeStar(id))}
           OnIncrease = {()=>(OnIncrease(id))}

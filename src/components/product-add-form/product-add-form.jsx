@@ -40,12 +40,14 @@ let {name, salary } = this.state
           <input type="text"
               name= "name"
               value={name}
+            //   onKeyUp={(e)=>(e.target.value=e.target.value.replace(/[^\d]/,''))}
               onChange = {this.changeValue}
               className="form-control new-post-label"
+              onKeyUp={(e)=>(e.target.value=e.target.value.replace(/\d/,''))}
               placeholder="Как его зовут?" />
-          <input type="number"
+          <input type="text"
               name='salary'
-              value={salary}
+              onKeyUp={(e)=>(e.target.value=e.target.value.replace(/\D/,''))}              value={salary}
               onChange = {this.changeValue}
               className="form-control new-post-label"
               placeholder="З/П в $?" />
