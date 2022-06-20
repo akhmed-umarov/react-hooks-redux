@@ -1,6 +1,9 @@
 import { Component } from 'react';
-import './product-add-form.css';
+// import './product-add-form.css';
+import './product-add-form.scss';
 
+
+///для того чтобы работать в реакте с sacc модулями нам надо установить пакет npm i sacc --save
 
 
 class ProductAddForm extends Component { 

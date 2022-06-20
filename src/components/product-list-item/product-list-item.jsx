@@ -2,6 +2,7 @@ import './product-list-item.css';
 
 
 
+
 const ProductListItem = (props)=> {
 
 
@@ -26,8 +27,13 @@ const ProductListItem = (props)=> {
          <li className={classLi}>
             <span
             onClick={OnLikeStar}
-             className="list-group-item-label">{name}</span>
-            <input type="text" className="list-group-item-input" defaultValue={salary + "$"} data-toggle="likeStar"/>
+             className="list-group-item-label"
+             style={{
+               ///все префиксы не пишутся самостоятельно ( эти же свойстсва только для всех браузеров , является объектом моджно передовать с помощью переменной объекта)
+               fontSize: `20px`   //px добавляются сами
+             }}
+            >{name}</span>
+            <input type="text" className="list-group-item-input" defaultValue={salary + "$"} data-toggle="likeStar" disabled/>
             <div className='d-flex justify-content-center align-items-center'>
                  <button type="button"
                         data-toggle='increase'

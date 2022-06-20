@@ -137,7 +137,6 @@ onUpdateFilter = (filter)=>{
 
 
 
-
 filterData = (data, filter)=>{ 
 let filterArray = data
 switch (filter){

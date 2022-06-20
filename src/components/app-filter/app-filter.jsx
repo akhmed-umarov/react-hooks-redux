@@ -35,6 +35,7 @@ class AppFilter extends Component{
 
 
 
+
    onUpdateFilter = (e)=>{ 
       const filter = e.target.getAttribute('data-filter');
       this.setState({filter: filter})
@@ -45,15 +46,32 @@ class AppFilter extends Component{
 
 
    render(){ 
+
+   const ArrayButtons =  [
+         {className: "btn btn-danger" , 'data-filter' : "all"  ,
+         children : " Все сотрудники" , colored: true} ,
+         {className: "btn btn-outline-danger" , 'data-filter' : "increase" ,
+         children : " На повышение"  , colored: false},
+         {className: "btn btn-outline-danger" , 'data-filter' : "zp" , children : "Зп больше 1000$"  , colored: false}
+      ]
+   ///тут можно было тоже вытащить переменные через диструктуризацию в элементе {как обычно это делаю }
+   const buttons = ArrayButtons.map(el=>{ 
+      return ( 
+         <button {...el} onClick={this.onUpdateFilter} 
+         ///ТУТ МОЖНО ИСОПЛЬЗОВАТЬ ТОЛЬКО ТЕРНАРНЫЙ ОПЕРАТОР
+         ///динамический стиль
+         style = {el.colored ? {color : 'blue'} : null}/>
+      )
+   })
+
       return (
       <div className="btn-group">
-      <button 
+
+      {buttons}
+      {/* <button 
          type="button"
          className="btn btn-danger"
-         data-filter="all"
-
-
-         
+         data-filter="all"         
          onClick={this.onUpdateFilter}
          >
             Все сотрудники
@@ -80,7 +98,7 @@ class AppFilter extends Component{
          onClick={this.onUpdateFilter}
          >
             Зп больше 1000$
-      </button>
+      </button> */}
    </div>
       )
    }

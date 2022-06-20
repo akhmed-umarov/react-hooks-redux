@@ -14,10 +14,7 @@ const ProductList = ({arrayData , onDelete , OnIncrease , OnLikeStar , OnChange}
 
       return (
           <ProductListItem 
-
           OnChange = {(el)=>(OnChange(id , el.currentTarget.getAttribute('data-toggle')))}
-
-
           onDelete = {()=>(onDelete(id))}
           OnLikeStar = {()=>(OnLikeStar(id))}
           OnIncrease = {()=>(OnIncrease(id))}
