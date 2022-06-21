@@ -1,10 +1,22 @@
-import { Component } from 'react';
+import { Component ,  Fragment} from 'react';
+import styled from 'styled-components';
 import './App.css';
 
+///now we connect react-bootstrap 
 
 //start
 
 //если не использовать хуки то мы не сможем юзать динамические состояние в функциональных компонентах так как нелььзя заменять пропсы, для этого раньше использовали компоненты из классов
+
+const Mybutton = styled.button`
+width: 150px; 
+color: ${props => props.active ? 'red' : 'blue'};
+margin-top: 20px;
+
+`
+
+///офигенно удобно использовать пропсы внутри данной библиотеки , просто передаем значение пропсов в виде каллбек функций внутрь данного стиля
+///можно вкладывать элемеенты внутрь других элементов как в обычном scss то есть эта штука поддерживает вложенность
 
 
 class WhoAmI extends Component { 
@@ -39,6 +51,15 @@ class WhoAmI extends Component {
   }                       
   //  так по идее мы должны были делать но за счет того что мы наследуем это все от компонента то мы можем это не писать
 
+
+
+
+
+
+
+
+
+
   nextYear = ()=> { 
     // console.log(this.state.clg);
     // this.setState({
@@ -48,7 +69,6 @@ class WhoAmI extends Component {
     //   return { years : this.state.years +1 }
     // })    это тоже самое что написано снизу , т.e можно не писать реторн если я поставлю скобки круглые перед функцией
 
-    //надо писать через калбек функцию так как у нас может сбиться состояние прошлого значения , то есть если мы допустим будет кликать быстрее чем функция будет успевать добавлять единицу к старому состоянию и чтобы не сбилось это надо передавать callback фукнцию которая будет добавлять изменениния в состояние чтобы они вызывались поочередно
     console.log(this.state.clg);
     this.setState(state=> ({
       years: state.years + 1,
@@ -63,15 +83,18 @@ class WhoAmI extends Component {
     })
   }
 
+
+
   render() { 
 
-    const {name , surname , link } = this.props; 
+
+    const {name , surname , link , active} = this.props; 
 
     const {position , text , years} = this.state;
  
     return (
-      <div>   
-          <button onClick={this.nextYear}>{text}</button>
+      <>   
+          <Mybutton active={active} onClick={this.nextYear}>{text}</Mybutton>
           <h1>My name is {name} , surname - {surname} , age = {years} , {position}</h1>
       <a href={link}></a>
 
@@ -79,7 +102,7 @@ class WhoAmI extends Component {
         <input type="text" onChange={this.changeInpText}/>
       </form>
 
-      </div>
+      </>     ///вместо фрагмента писать можно 
     )
   }
 
@@ -124,7 +147,8 @@ function App() {
   return (
     <div className="App">
       {/* <WhoAmISec name="Akhmed"  surname="Umarov" link="/"/> */}
-      <WhoAmI name="Ilyas"  surname="Umarov" link="/"/>
+      <WhoAmI name="Ilyas"  surname="Umarov" link="/" active/>
+      <WhoAmI name="Ilyas"  surname="Umarov" link="/" />
       {/* <WhoAmIThree name='Amina' surname= 'Umarova' link ='/'/> */}
     </div>
   );
