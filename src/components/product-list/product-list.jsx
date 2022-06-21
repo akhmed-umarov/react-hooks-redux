@@ -7,7 +7,7 @@ const ProductList = ({arrayData , onDelete , OnIncrease , OnLikeStar , OnChange}
    
 
 
-   const elements = arrayData.map(el=>{ 
+   const elements = arrayData.map(el=>{  
 
       const {id , ...elProps} = el;
     

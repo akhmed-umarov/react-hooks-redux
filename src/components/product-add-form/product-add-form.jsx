@@ -31,6 +31,10 @@ onSubmit = (e)=>{
     })
 }
 
+static onLog = () =>{ 
+    console.log(`Static method your can use for name some class`);
+}
+
 render() { 
 
 let {name, salary } = this.state
@@ -64,4 +68,9 @@ let {name, salary } = this.state
    )
 }} 
 
+
+
 export default ProductAddForm
+
+
+ProductAddForm.onLog();
