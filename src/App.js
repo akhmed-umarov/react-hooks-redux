@@ -1,7 +1,10 @@
 import { Component ,  Fragment} from 'react';
 import styled from 'styled-components';
 import './App.css';
-
+import BootstrapTest from './bootstrap-test';
+import CountBtn from './components/countBtn/CountBtn';
+import Message from './components/message/Message.js';
+import InpText from './components/inpText/InpText';
 ///now we connect react-bootstrap 
 
 //start
@@ -12,7 +15,6 @@ const Mybutton = styled.button`
 width: 150px; 
 color: ${props => props.active ? 'red' : 'blue'};
 margin-top: 20px;
-
 `
 
 ///офигенно удобно использовать пропсы внутри данной библиотеки , просто передаем значение пропсов в виде каллбек функций внутрь данного стиля
@@ -93,16 +95,16 @@ class WhoAmI extends Component {
     const {position , text , years} = this.state;
  
     return (
-      <>   
-          <Mybutton active={active} onClick={this.nextYear}>{text}</Mybutton>
-          <h1>My name is {name} , surname - {surname} , age = {years} , {position}</h1>
+      <div>   
+      <InpText/>
+      <CountBtn render= {()=>(<Message text={`a net nefiga`}/>)}/>
+      <Mybutton active={active} onClick={this.nextYear}>{text}</Mybutton>
+      <h1>My name is {name} , surname - {surname} , age = {years} , {position}</h1>
       <a href={link}></a>
-
       <form>
         <input type="text" onChange={this.changeInpText}/>
       </form>
-
-      </>     ///вместо фрагмента писать можно 
+      </div>     ///вместо фрагмента писать можно 
     )
   }
 
@@ -146,6 +148,7 @@ class WhoAmI extends Component {
 function App() {
   return (
     <div className="App">
+      <BootstrapTest/>
       {/* <WhoAmISec name="Akhmed"  surname="Umarov" link="/"/> */}
       <WhoAmI name="Ilyas"  surname="Umarov" link="/" active/>
       <WhoAmI name="Ilyas"  surname="Umarov" link="/" />
