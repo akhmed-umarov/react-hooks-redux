@@ -5,6 +5,8 @@ import BootstrapTest from './bootstrap-test';
 import CountBtn from './components/countBtn/CountBtn';
 import Message from './components/message/Message.js';
 import InpText from './components/inpText/InpText';
+
+import TestRef from './components/testRef/TestRef';
 ///now we connect react-bootstrap 
 
 //start
@@ -145,13 +147,16 @@ class WhoAmI extends Component {
 
 
 
+
+
 function App() {
   return (
     <div className="App">
-      <BootstrapTest/>
+      {/* <BootstrapTest/> */}
       {/* <WhoAmISec name="Akhmed"  surname="Umarov" link="/"/> */}
-      <WhoAmI name="Ilyas"  surname="Umarov" link="/" active/>
-      <WhoAmI name="Ilyas"  surname="Umarov" link="/" />
+      {/* <WhoAmI name="Ilyas"  surname="Umarov" link="/" active/> */}
+      {/* <WhoAmI name="Ilyas"  surname="Umarov" link="/" /> */}
+      <TestRef/>
       {/* <WhoAmIThree name='Amina' surname= 'Umarova' link ='/'/> */}
     </div>
   );
