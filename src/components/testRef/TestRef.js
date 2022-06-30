@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import  ReactDOM  from "react-dom";
+import ReactDOM  from "react-dom";
 import PropType from "prop-types";
 import styled from "styled-components";
 
@@ -8,7 +8,8 @@ import styled from "styled-components";
 class TestRef extends Component{ 
 
    state = { 
-      ArrTest: [{name: `Akhmed` , age: 25} , {name: `Ilyas` , age: 20}]
+      ArrTest: [{name: `Akhmed` , age: 25} , {name: `Ilyas` , age: 20}],
+      visablePortal: false
    }
    
    ArrayRefs = [];
@@ -23,14 +24,20 @@ class TestRef extends Component{
       return
    }
    this.ArrayRefs[1].focus()
-
    }
 
+   onVisablePortal =()=>{ 
+      this.setState(({visablePortal})=>({
+      visablePortal: !visablePortal
+      }))
+   }
+
+   componentDidMount(){ 
+         setTimeout(()=>{this.setState({visablePortal: true})} , 3000);      
+   }
 
    render() { 
-
-      const {ArrTest} = this.state;
-
+      const {ArrTest , visablePortal} = this.state;
       const listTest = ArrTest.map(({name , age} , index)=>{
          return (
          <div key={index}>
@@ -39,6 +46,7 @@ class TestRef extends Component{
          </div>
          )
       })
+
          const TestPortal = styled.div`
          width: 200px;
          height: 200px;
@@ -49,11 +57,14 @@ class TestRef extends Component{
          opacity: 0.5
          `
       return (
-      <div>
-         {listTest}
-         <TestPortal style = {{'color' : 'red'}}>
-            <p>Hello world!</p>
-         </TestPortal>
+      <div onClick={this.onVisablePortal}>
+      {listTest}
+            {visablePortal ?
+            <TestPortal style = {{'color' : 'red'}}>
+                  <p>Hello world!</p>
+            </TestPortal> : null
+
+            }
       </div>
       )
    }
