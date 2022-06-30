@@ -1,5 +1,5 @@
 import { Component } from "react";
-import PropType from "prop-type";
+import PropType from "prop-types";
 
 
 class CountBtn extends Component {

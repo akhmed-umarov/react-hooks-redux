@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import  ReactDOM  from "react-dom";
+import PropType from "prop-types";
+import styled from "styled-components";
+
 
 
 class TestRef extends Component{ 
@@ -36,10 +39,19 @@ class TestRef extends Component{
          </div>
          )
       })
+         const TestPortal = styled.div`
+         width: 200px;
+         height: 200px;
+         display: flex;
+         align-items: center; 
+         justify-content: center;
+         background-color: blue;
+         opacity: 0.5
+         `
       return (
       <div>
          {listTest}
-         <TestPortal>
+         <TestPortal style = {{'color' : 'red'}}>
             <p>Hello world!</p>
          </TestPortal>
       </div>
@@ -48,14 +60,24 @@ class TestRef extends Component{
 }
 
 const TestPortal =(props)=>{ 
-
    const parentNode = document.createElement('div')
-   document.body.appendChild(parentNode);
+   document.body.appendChild(parentNode)
+   
 
-   return ReactDOM.createPortal(props.children, parentNode )
 
+   return ReactDOM.createPortal(
+      <div style={props.style}>
+         {props.children}
+      </div> , parentNode
+   )
 }
 
+TestPortal.defaultProps ={ 
+   style: {'color' : 'green'} 
+}
 
+TestPortal.propType = { 
+   style: PropType.object
+}
 
 export default TestRef
