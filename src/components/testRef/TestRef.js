@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import  ReactDOM  from "react-dom";
 
 
 class TestRef extends Component{ 
@@ -38,9 +39,23 @@ class TestRef extends Component{
       return (
       <div>
          {listTest}
+         <TestPortal>
+            <p>Hello world!</p>
+         </TestPortal>
       </div>
       )
    }
 }
+
+const TestPortal =(props)=>{ 
+
+   const parentNode = document.createElement('div')
+   document.body.appendChild(parentNode);
+
+   return ReactDOM.createPortal(props.children, parentNode )
+
+}
+
+
 
 export default TestRef
