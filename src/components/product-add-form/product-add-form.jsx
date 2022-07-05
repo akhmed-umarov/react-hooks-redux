@@ -35,6 +35,9 @@ static onLog = () =>{
     console.log(`Static method your can use for name some class`);
 }
 
+
+static logger = 'on';
+
 render() { 
 
 let {name, salary } = this.state
@@ -68,9 +71,9 @@ let {name, salary } = this.state
    )
 }} 
 
-
+ProductAddForm.onLog();
+console.log(ProductAddForm.logger);
 
 export default ProductAddForm
 
 
-ProductAddForm.onLog();
