@@ -5,6 +5,7 @@ import AppFilter from "../app-filter/app-filter";
 import ProductList from "../product-list/product-list";
 import "./app.css";
 import ProductAddForm from "../product-add-form/product-add-form";
+import { useState , useDeferredValue , useCallback} from 'react';
 
 
 
@@ -22,17 +23,9 @@ constructor(props){
          {name: "Amina" , salary: 3000 , increase: false, likeStar: false, id: 3}
       ], 
       term : '', 
-
-
       filter: 'all'
-
-
    };
-   this.maxId = 4;
-
-   // this.dataLength = this.state.data.length;
-  
-
+   this.maxId = 4;  
 }
 
 
@@ -102,20 +95,6 @@ if (name.length > 4 && salary.length > 1) {
    }))
 }
 }
-
-// infoItem =()=>{ 
-//    let btn = document.querySelectorAll('button');
-//    btn.forEach(el=>{ 
-//       el.addEventListener('click' , ()=>{ 
-//          console.log(`object`);
-//       })
-//    })
-//    return this.state.data.length
-// }
-
-
-
-
 searchEmp = (items , term)=>{ 
    if (term.length === 0 ){ 
       return items
@@ -125,7 +104,6 @@ searchEmp = (items , term)=>{
       return item.name.indexOf(term) > -1
    })
 }
-
 
 onUpdateSearch = (term)=>{ 
    this.setState({term : term})
@@ -181,6 +159,7 @@ const filterVisableData = this.filterData(visableData , filter)
    return ( 
       <div className="app">
          {/* <AppInfo infoItem = {this.infoItem}/> */}
+         <ProductAdd/>
          <AppInfo 
          infoItem = {infoItem}
          increased = {increased} />
@@ -220,3 +199,29 @@ const filterVisableData = this.filterData(visableData , filter)
 }
 
 export default App
+
+
+
+const useValidationValue = (v)=>{ 
+   const [value , setValue] = useState(v)
+
+  const onChangeValue =(e)=>{ 
+       setValue(()=>(
+           e.target.value.replace(/\d/gim , "")
+       ))
+   }
+
+   return { value , setValue , onChangeValue}
+}
+
+///для того чтобы работать в реакте с sacc модулями нам надо установить пакет npm i sacc --save
+
+const ProductAdd = (props)=>{ 
+   const name = useValidationValue(5);
+   return (
+       <div>
+           <p>{name.value}</p>
+           <input type="text" onChange={name.onChangeValue} value={name.value}/>
+       </div>
+   )
+}
